@@ -9,5 +9,9 @@
         <members>Case_Service_Information</members>
         <name>AuraDefinitionBundle</name>
     </types>
+    <types>
+        <members>*</members>
+        <name>CustomMetadata</name>
+    </types>
     <version>45.0</version>
 </Package>
