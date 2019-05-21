@@ -1,0 +1,38 @@
+<aura:component controller="CaseServiceInformationController"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+
+    <aura:attribute name="recordId" type="Id" />
+	<aura:attribute name="caseRecord" type="Object"/>
+    <aura:attribute name="recordLoadError" type="String"/>
+	<aura:attribute name="caseServiceInfo" type="Object"/>
+    
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      fields="CaseNumber,Product__c,Home_Country__c"
+                      targetFields="{!v.caseRecord}"
+                      targetError="{!v.recordLoadError}"
+                      recordUpdated="{!c.doInit}"
+    />
+
+    <div class="Record Details"> 
+        <lightning:card iconName="standard:case" title="Important Information" >
+            <div class="slds-p-horizontal--small">
+                <p class="slds-page-header__title slds-truncate slds-align-middle"><lightning:formattedText title="Cost per Calendar Month" value="Cost per Calendar Month" /></p>
+                <p class="slds-truncate slds-text-heading--medium">
+                    <lightning:formattedNumber style="currency" currencyCode="{!v.caseServiceInfo.Currency_Symbol__c}" currencyDisplayAs="symbol"
+                                               title="Cost per Calendar Month" value="{!v.caseServiceInfo.Cost_per_Calendar_Month__c}" />
+                </p>
+                <p class="slds-page-header__title slds-truncate slds-align-middle"><lightning:formattedText title="ATM Fee in other currencies" value="ATM Fee in other currencies"/></p>
+                <p class="slds-truncate slds-text-heading--medium">
+                    <lightning:formattedNumber style="percent" minimumFractionDigits="1" 
+                                               title="ATM Fee in other currencies" value="{!v.caseServiceInfo.ATM_Fee_in_other_currencies__c}" />
+                </p>
+                <p class="slds-page-header__title slds-truncate slds-align-middle"><lightning:formattedText title="Card Replacement Cost" value="Card Replacement Cost" /></p>
+                <p class="slds-truncate slds-text-heading--medium">
+                    <lightning:formattedNumber style="currency" currencyCode="{!v.caseServiceInfo.Currency_Symbol__c}" 
+                                               title="Card Replacement Cost" value="{!v.caseServiceInfo.Card_Replacement_Cost__c}" />
+                </p>
+            </div>
+        </lightning:card>
+    </div>	
+</aura:component>
